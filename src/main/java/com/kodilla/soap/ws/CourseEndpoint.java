@@ -11,21 +11,21 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
 public class CourseEndpoint {
-  private static final String NAMESPACE_URI = "http://kodilla.com/courses/soap";
+    private static final String NAMESPACE_URI = "http://kodilla.com/courses/soap";
 
-  private final CoursesRepository coursesRepository;
+    private final CoursesRepository coursesRepository;
 
-  @Autowired
-  public CourseEndpoint(CoursesRepository coursesRepository) {
-    this.coursesRepository = coursesRepository;
-  }
+    @Autowired
+    public CourseEndpoint(CoursesRepository coursesRepository) {
+        this.coursesRepository = coursesRepository;
+    }
 
-  @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCourseRequest")
-  @ResponsePayload
-  public GetCourseResponse getCourse(@RequestPayload GetCourseRequest request) {
-    GetCourseResponse response = new GetCourseResponse();
-    response.setCourse(coursesRepository.findCourse(request.getName()));
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCourseRequest")
+    @ResponsePayload
+    public GetCourseResponse getCourse(@RequestPayload GetCourseRequest request) {
+        GetCourseResponse response = new GetCourseResponse();
+        response.setCourse(coursesRepository.findCourse(request.getName()));
 
-    return response;
-  }
+        return response;
+    }
 }

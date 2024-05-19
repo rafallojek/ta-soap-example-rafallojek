@@ -15,26 +15,26 @@ import org.springframework.xml.xsd.XsdSchema;
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
-  @Bean
-  public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
-    MessageDispatcherServlet servlet = new MessageDispatcherServlet();
-    servlet.setApplicationContext(applicationContext);
-    servlet.setTransformWsdlLocations(true);
-    return new ServletRegistrationBean<>(servlet, "/ws/*");
-  }
+    @Bean
+    public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
+        MessageDispatcherServlet servlet = new MessageDispatcherServlet();
+        servlet.setApplicationContext(applicationContext);
+        servlet.setTransformWsdlLocations(true);
+        return new ServletRegistrationBean<>(servlet, "/ws/*");
+    }
 
-  @Bean(name = "courses")
-  public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema coursesSchema) {
-    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-    wsdl11Definition.setPortTypeName("CoursesPort");
-    wsdl11Definition.setLocationUri("/ws");
-    wsdl11Definition.setTargetNamespace("http://kodilla.com/courses/soap");
-    wsdl11Definition.setSchema(coursesSchema);
-    return wsdl11Definition;
-  }
+    @Bean(name = "courses")
+    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema coursesSchema) {
+        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+        wsdl11Definition.setPortTypeName("CoursesPort");
+        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setTargetNamespace("http://kodilla.com/courses/soap");
+        wsdl11Definition.setSchema(coursesSchema);
+        return wsdl11Definition;
+    }
 
-  @Bean
-  public XsdSchema coursesSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("kodilla.xsd"));
-  }
+    @Bean
+    public XsdSchema coursesSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("kodilla.xsd"));
+    }
 }
